@@ -1,0 +1,20 @@
+
+<h1>Projects: Index</h1>
+
+  <p>Here are all the projects:</p>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Projects</th>
+        <th>Company</th>
+      </tr>
+      <% @projects.each do |project| %>
+        <%= render "project", project:project %>
+      <%end %>
+    </tbody>
+  </table>
+
+  <% content_for :aside do %>
+  <%=render 'sidebar' %>
+  <% end %>

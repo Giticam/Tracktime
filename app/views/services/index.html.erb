@@ -1,0 +1,22 @@
+<h1>Services :Index</h1>
+<p>Here are all the Service items</p>
+
+<table>
+  <tbody>
+    <tr>
+      <th>User</th>
+      <th>Project</th>
+      <th>Date/time</th>
+      <th>Hours</th>
+      <th>Details</th>
+    </tr>
+    <% @services.each do |service| %>
+      <%= render 'service', service: service  %>
+    <% end %>
+
+  </tbody>
+</table>
+
+<% content_for :aside do %>
+<%=render 'sidebar' %>
+<% end %>

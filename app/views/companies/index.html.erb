@@ -1,0 +1,17 @@
+<h1>Companies: Index</h1>
+
+<p>Here are all the companies </p>
+<table>
+  <tbody>
+    <tr>
+      <th>Company</th>
+    </tr>
+    <% @companies.each do |company| %>
+      <%= render 'company', company: company  %>
+    <% end %>
+  </tbody>
+</table>
+
+<% content_for :aside do %>
+<%=render 'sidebar' %>
+<% end %>

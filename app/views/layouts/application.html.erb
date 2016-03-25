@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tracktime</title>
+  <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+  <meta name ="viewport" content="width=device-width", initial-scale=1">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id = "container">
+    <header>
+      <a id="logoTitle" href="/" ><img id="logo" src="/assets/time.png"> Track Time</a>
+      <nav>
+          <ul>
+            <li><%= link_to "Services", services_path %> </li>
+            <li><%= link_to "Projects", projects_path %> </li>
+            <li><%= link_to "Companies", companies_path %> </li>
+          </ul>
+      </nav>
+    </header>
+    <% if notice %>
+     <div class="alert fade in alert-success">
+       <button type="button" class="close" data-dismiss="alert">&times;</button>
+       <h4><%= notice %></h4>
+     </div>
+
+     <% elsif alert %>
+     <div class="alert fade in alert-danger">
+       <button type="button" class="close" data-dismiss="alert">&times;</button>
+       <h4><%= alert %></h4>
+     </div>
+   <% end %>
+
+    <section id = "main">
+      <article>
+        <%= yield %>
+      </article>
+      <aside>
+        <%= yield :aside %>
+      </aside>
+    </section>
+    <footer>
+      <p>Track time is a project written on <em>Ruby on Rails</em></p>
+    </footer>
+  </div>
+
+
+</body>
+</html>

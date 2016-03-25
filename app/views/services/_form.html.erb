@@ -1,0 +1,7 @@
+<%= simple_form_for @service do |f| %>
+  <%= f.input :project_id, collection: Project.all,prompt: true%>
+  <%= f.input :user_id, collection: User.all.order('first_name,last_name'),prompt: true%>
+  <%= f.input :dateworked, label: 'Date/Time' %>
+  <%= f.input :hours, collection: 1..8,prompt: true %>
+  <%= f.submit class: "btn btn-default" %>
+<% end %>

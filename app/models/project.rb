@@ -1,0 +1,25 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  id             :integer          not null, primary key
+#  name           :string
+#  company_id     :integer
+#  default_charge :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
+class Project < ActiveRecord::Base
+  belongs_to :company
+	has_many :services
+	has_many :users, :through => :services
+
+	validates :name, length: { minimum: 5 }
+	validates :company, presence: true
+	validates :default_charge, numericality: { only_integer: true,
+											 greater_than: 50,
+											 less_than: 10000 }
+
+	scope :lowdefaultcharge, -> { where("default_charge < 100") }
+end
