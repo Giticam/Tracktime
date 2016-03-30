@@ -1,15 +1,15 @@
 class CompaniesController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
   before_action :find_company, only: [:show,:update,:edit]
 
   def index
     @companies = Company.all
+    @company = Company.new
   end
 
   def show
-    respond_to do |format|
-      format.html{}
-      format.json{render json:@company}
-    end
+      # format.html{}
+      # format.json{render json:@company}
   end
 
   def new
@@ -17,11 +17,17 @@ class CompaniesController < ApplicationController
   end
 
   def create
-    @company = Company.new company_params
-    if @company.save
-    redirect_to @company, notice: "Company Created!"
-    else
-    render 'new', flash[:alert] = "Company not Created!"
+      @company = Company.new company_params
+    respond_to do |format|
+      if @company.save
+      format.html {redirect_to @company, notice: "Company Created!"}
+      format.json {render :show, status: :created, location: @company}
+      format.js
+      else
+      format.html{render 'new', flash[:alert] = "Company not Created!"}
+      format.json{render json: @company.errors, status: :unprocessable_entity}
+      format.js
+      end
     end
   end
 
@@ -30,10 +36,16 @@ class CompaniesController < ApplicationController
   end
 
   def update
-    if @company.update company_params
-      redirect_to @company, notice: "Company has been updated"
-    else
-      render "edit", flash[:alert] = "Company has not been updated"
+    respond_to do |format|
+      if @company.update company_params
+        format.html {redirect_to @company, notice: "Company has been updated"}
+        format.json {render :show, status: :ok, location: @company}
+        format.js
+      else
+        format.html {render "edit", flash[:alert] = "Company has not been updated"}
+        format.json {render json: @company.errors, status: :unprocessable_entity}
+        format.js
+      end
     end
   end
     private
@@ -45,5 +57,4 @@ class CompaniesController < ApplicationController
     def find_company
       @company = Company.find params[:id]
     end
-
 end
