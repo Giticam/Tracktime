@@ -1,3 +1,46 @@
-<tr>
-  <td><%= link_to company.name, company %></td>
-</tr>
+<!-- <tr>
+  <td><%#= link_to company.name, company %></td>
+</tr> -->
+<div class="col-md-4 company-main box text-center" id="company_<%= company.id %>">
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= link_to company.name, company %></h3>
+    </div>
+
+    <div class="panel-body">
+      <!-- <div style="color: #3BB2D6;"><%#= company.projects["name"] %></div>
+      <br /> -->
+      <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myupdatecompany_<%= company.id %>">
+          Edit
+        </button>
+      </div>
+    </div>    <!--panel Body-->
+  </div>      <!--panel_info-->
+<!--Modal - update-->
+  <%= form_for(company, :method => :put, remote: true) do |f| %>
+    <div class="modal fade" id="myupdatecompany_<%= company.id %>" tabindex="-1" role=dialog aria-labelledby="myModallabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Edit</h4>
+          </div>
+          <div class="modal-body">
+            <div class="field">
+              <%= f.label :name %><br />
+              <%= f.text_area :name, class: "form-control" %>
+            </div>
+          </div>
+          <div class="modal-footer">
+             <button type="button" id="myupdatebutton_<%= company.id %>" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= submit_tag "Update", class:"btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+   <% end %>
+  <!--modal  -->
+</div>

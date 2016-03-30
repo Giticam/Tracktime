@@ -1,16 +1,47 @@
-<h1>Companies: Index</h1>
+<!-- <h1>Companies: Index</h1>
 
 <p>Here are all the companies </p>
 <table>
   <tbody>
     <tr>
       <th>Company</th>
-    </tr>
-    <% @companies.each do |company| %>
-      <%= render 'company', company: company  %>
-    <% end %>
-  </tbody>
-</table>
+    </tr> -->
+    <%# @companies.each do |company| %>
+      <%#= render 'company', company: company  %>
+    <%# end %>
+  <!-- </tbody>
+</table> -->
+<div class="container-fluid">
+
+   <div class="row" id="container_companies">
+     <%= render @companies %>
+   </div>
+
+  <!--Modal create action  -->
+  <%= form_for(@company, remote: true) do |f| %>
+  <div class="modal fade" id="mynewcompany" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Companies</h4>
+        </div>
+         <div class="modal-body">
+          <div class="field">
+            <%= f.label :name %><br />
+            <%= f.text_area :name, class: "form-control company_name" %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewcompanyclose">Close</button>
+          <%= submit_tag "Create",class: "btn btn-primary" %>
+           <button type="button" class="btn btn-primary">Save changes</button>
+         </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
 
 <% content_for :aside do %>
 <%=render 'sidebar' %>

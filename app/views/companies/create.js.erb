@@ -1,0 +1,5 @@
+$("#mynewcompany").modal('hide');
+$(".company_name").val("");
+
+$("#container_companies").prepend('<%= j render @company %>');
+$("#company_<%=@company.id%>").hide().fadeIn(1000);
