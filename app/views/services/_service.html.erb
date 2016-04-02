@@ -1,3 +1,4 @@
+<%# services.each do |service| %>
 <tr>
   <td><%= service.user.full_name %></td>
   <td><%= link_to service.project.name, service.project%></td>
@@ -5,3 +6,4 @@
   <td><%= service.hours %></td>
   <td><%=link_to "Details",service%> </td>
 </tr>
+<%#end %>

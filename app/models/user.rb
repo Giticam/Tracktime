@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   belongs_to :company
 	has_many :works
 	has_many :projects, :through => :services
+  has_many :projects
 
 	validates :first_name, length: { minimum: 2 }
 	validates :last_name, length: { minimum: 5 }

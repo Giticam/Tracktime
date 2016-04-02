@@ -2,6 +2,7 @@
 
 <p>Company: <%= @project.company.name %></p>
 <p>Default Rate: <%= @project.default_charge %></p>
+<p>Owner: <%= @project.user.full_name %></p>
 
 
 <table>
@@ -14,14 +15,14 @@
       <th>Details</th>
     </tr>
     <% @project.services.each do |service| %>
-    <%= render '/services/service', service: service  %>
-
+      <%= render '/services/service', service: service  %>
     <% end %>
   </tbody>
 </table>
-
-<p><%= link_to "Edit Project", edit_project_path(@project) %></p>
+<br />
+<br />
 
 <% content_for :aside do %>
   <%=render 'sidebar'  %>
+  <p><%= link_to "Edit Project", edit_project_path(@project) %></p>
 <% end %>

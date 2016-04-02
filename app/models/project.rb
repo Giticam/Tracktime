@@ -8,12 +8,14 @@
 #  default_charge :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  user_id        :integer
 #
 
 class Project < ActiveRecord::Base
   belongs_to :company
 	has_many :services
 	has_many :users, :through => :services
+	belongs_to :user
 
 	validates :name, length: { minimum: 5 }
 	validates :company, presence: true

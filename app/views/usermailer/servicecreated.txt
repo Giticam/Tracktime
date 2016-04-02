@@ -1,0 +1,9 @@
+Service Started:
+
+==========
+   The service has been initiated by: <%= @service.user %>
+   Started at:<%= @service.created_at.strftime('%m/%d/%Y %I:%M %p') %>
+   Project associated with:<%= @service.project.name %>
+   Hours:<%= @service.hours %>
+
+   

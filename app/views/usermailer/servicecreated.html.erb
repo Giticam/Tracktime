@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html";charset="utf-8" http-equiv='content-Type'>
+  </head>
+  <body>
+      <h1>Service Started</h1>
+      <p>The service has been initiated by: <%= @service.user %><br />
+         Started at:<%= @service.created_at.strftime('%m/%d/%Y %I:%M %p') %><br />
+         Project associated with:<%= @service.project.name %><br />
+         Hours:<%= @service.hours %>
+       </p>
+  </body>
+</html>
