@@ -1,17 +1,17 @@
-<% if @service.errors.any? %>
-	<div id="errors">
-		<p>Please correct the following <%= pluralize(@service.errors.count, "error") %>:</p>
-		<ul>
-			<% @service.errors.full_messages.each do |msg| %>
-				<li><%= msg %></li>
-			<% end %>
-		</ul>
-	</div>
-<% end %>
 
+<div id="errors">
+    <% if @service.errors.any? %>
+            <p>Please correct the following <%= pluralize(@service.errors.count, "error") %>:</p>
+            <ul>
+                <% @service.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+    <% end %>
+</div>
 <%= simple_form_for(@service, remote: true) do |f| %>
   <%= f.input :project_id, collection: Project.all,prompt: true%>
-  <%= f.input :user_id, collection: User.all, label_method: :full_name, prompt: true%>
+  <%#= f.input :user_id, collection: User.all, label_method: :full_name, prompt: true%>
   <%= f.input :dateworked, label: 'Date/Time' %>
   <%= f.input :hours, collection: 1..8,prompt: true %>
   <%= f.submit class: "btn btn-default" %>

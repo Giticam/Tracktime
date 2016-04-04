@@ -13,10 +13,9 @@
     <% @services.each do |service| %>
       <%= render 'service', service: service  %>
     <% end %>
-
   </tbody>
 </table>
-
+<%= will_paginate @services %>
 <% content_for :aside do %>
 <%=render 'sidebar' %>
 <% end %>

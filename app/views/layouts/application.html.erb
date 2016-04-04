@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Tracktime</title>
-  <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
   <meta name ="viewport" content="width=device-width", initial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -13,6 +13,17 @@
     <header>
       <a id="logoTitle" href="/" ><img id="logo" src="/assets/time.png"> Track Time</a>
       <nav>
+        <% if user_signed_in? %>
+          Hello <%= current_user.first_name %>
+          <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+          <%= link_to "Edit Profile", edit_user_registration_path %>
+          <%#= link_to "Companies", companies_path %>
+        <% else %>
+          <%= link_to "Sign In", new_user_session_path %> |
+          <%= link_to "Sign Up", new_user_registration_path %>
+        <% end %>
+        <br />
+        <br />
           <ul>
             <li><%= link_to "Services", services_path %> </li>
             <li><%= link_to "Projects", projects_path %> </li>
@@ -38,21 +49,7 @@
         <%= yield %>
       </article>
       <aside>
-        <% if user_signed_in? %>
 
-          Hello <%= current_user.first_name %>
-          <br />
-          <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-          <br />
-          <%= link_to "Edit Profile", edit_user_registration_path %>
-          <br />
-          <!-- <br />
-          <%#= link_to "Companies", companies_path %> -->
-          <br />
-        <% else %>
-          <%= link_to "Sign In", new_user_session_path %> |
-          <%= link_to "Sign Up", new_user_registration_path %>
-        <% end %>
         <%= yield :aside %>
       </aside>
     </section>

@@ -1,8 +1,9 @@
 class ProjectsController < ApplicationController
-  # before_action :authenticate_user!
+  before_filter :authenticate_user!
   before_action :find_project, only: [:show,:update,:edit]
   def index
     @projects = Project.all
+    @project = Project.new
   end
 
   def show
@@ -11,7 +12,6 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
-
   end
 
   def create
@@ -20,8 +20,15 @@ class ProjectsController < ApplicationController
     # you need to associate the project with a user and since new doesn't have a
     # user associated in the database, we need to ensure the new project belongs to
     # current_user.
-    @project.save
-    redirect_to @project, notice: "Project has been Created!"
+    respond_to do |format|
+      if @project.save
+        format.html{redirect_to @project, notice: "Project has been Created!"}
+        format.js{render}
+      else
+        format.html{render "new", flash[:alert] => "Project not Created!"}
+        format.js {render}
+      end
+    end
   end
 
   def edit
@@ -29,11 +36,15 @@ class ProjectsController < ApplicationController
   end
 
   def update
-
-    if @project.update project_params
-      redirect_to @project, notice: "Project has been updated"
-    else
-      render "edit", flash[:alert] = "Work has not been updated"
+    respond_to do |format|
+      if @project.update project_params
+        Usermailer.projectcreated(@project).deliver_now
+        format.html{redirect_to @project, notice: "Project has been updated"}
+        format.js{render}
+      else
+        format.html{render "edit", flash[:alert] => "Work has not been updated"}
+        format.js{render}
+      end
     end
   end
 

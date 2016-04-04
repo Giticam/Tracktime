@@ -18,6 +18,7 @@
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
 #  company_id             :integer
+#  admin                  :boolean          default(FALSE)
 #
 # Indexes
 #

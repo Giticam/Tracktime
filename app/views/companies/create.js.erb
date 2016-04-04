@@ -1,5 +1,11 @@
-$("#mynewcompany").modal("hide");
-$(".company_name").val("");
-
-$("#container_companies").prepend("<%= j render @company%>");
-$("#company_<%=@company.id%>").hide().fadeIn();
+<% if @company.errors.any? %>
+  var error_header1 = "<p>Please correct the following <%= pluralize(@company.errors.count, "error") %>:</p>";
+  var errors1 = "<ul><% @company.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul>";
+  $('div#errors').html(error_header1 + errors1);
+<% else %>
+  $('div#errors').html("");
+  $("#mynewcompany").modal("hide");
+  $(".company_name").val("");
+  $("#container_companies").prepend("<%= j render @company%>");
+  $("#company_<%=@company.id%>").hide().fadeIn();
+<% end %>

@@ -5,9 +5,9 @@ class Usermailer < ApplicationMailer
     mail(to: service.project.user.email, subject: "Service Item created")
   end
 
-  def projectcreated(service)
+  def projectcreated(project)
     @project = project
     mail(to: project.user.email, subject: " Project created")
   end
-  
+
 end

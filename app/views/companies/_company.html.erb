@@ -1,21 +1,27 @@
-  
-<div class="col-md-4 company-main box text-center" id="company_<%= company.id %>">
 
-  <div class="panel panel-info">
+
+<div class="col-md-10 company-main box text-center" id="company_<%= company.id %>">
+  <li class="list-group-item" id="company_<%= company.id %>">
+    <span class="pull-right">
+      <%= link_to fa_icon('trash-o 1x'), company, method: :delete %>
+    </span>
+    <h5><%= link_to company.name, company %></h5>
+  </li>
+  <!-- <div class="panel panel-info">
     <div class="panel-heading">
       <h3 class="panel-title"><%= link_to company.name, company %></h3>
     </div>
 
-    <div class="panel-body">
+    <div class="panel-body"> -->
       <!-- <div style="color: #3BB2D6;"><%#= company.projects["name"] %></div>
       <br /> -->
-      <div class="btn-group" role="group" aria-label="...">
+      <!-- <div class="btn-group" role="group" aria-label="...">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myupdatecompany_<%= company.id %>">
           Edit
         </button>
       </div>
     </div>    <!--panel Body-->
-  </div>      <!--panel_info-->
+  <!-- </div>      <!--panel_info-->
 <!--Modal - update-->
   <%= form_for(company, :method => :put, remote: true) do |f| %>
     <div class="modal fade" id="myupdatecompany_<%= company.id %>" tabindex="-1" role=dialog aria-labelledby="myModallabel" aria-hidden="true">

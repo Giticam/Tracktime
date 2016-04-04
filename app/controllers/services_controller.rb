@@ -1,10 +1,9 @@
 class ServicesController < ApplicationController
-
-  # before_action :authenticate_user!
+  before_filter :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :find_service, only: [:show,:update,:edit]
 
     def index
-        @services = Service.all.order('dateworked desc')
+        @services = Service.all.order('dateworked desc').paginate(:page => params[:page])
         @service = Service.new
     end
 
@@ -18,12 +17,10 @@ class ServicesController < ApplicationController
 
     def create
       @service = Service.new service_params
-      #TODO verify the following line: i.e you're passing project id
-      #@project = Project.find(params[:project_id])
-      #@service.project = @project
+      @service.user = current_user
       respond_to do |format|
         if @service.save
-          Usermailer.servicecreated(@service).deliver_now
+         Usermailer.servicecreated(@service).deliver_now
          format.html{redirect_to @service, notice: "Service has been Created!"}
          format.js {render}
         else
@@ -37,12 +34,13 @@ class ServicesController < ApplicationController
     end
 
     def update
+      @service.user = current_user
       respond_to do |format|
         if @service.update service_params
           format.html{redirect_to @service, notice: "Service has been updated"}
           format.js
         else
-          format.html{render "edit", flash[:alert] = "Service has not been updated"}
+          format.html{render "edit", flash[:alert] => "Service has not been updated"}
           format.js
         end
       end
@@ -51,7 +49,7 @@ class ServicesController < ApplicationController
     private
 
     def service_params
-      params.require(:service).permit(:project_id, :user_id, :dateworked, :hours)
+      params.require(:service).permit(:project_id, :dateworked, :hours)
     end
 
     def find_service

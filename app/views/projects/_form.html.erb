@@ -1,5 +1,15 @@
+<div id="errors">
+	<% if @project.errors.any? %>
+			<p>Please correct the following <%= pluralize(@project.errors.count, "error") %>:</p>
+			<ul>
+				<% @project.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+	<% end %>
+</div>
 
-<%= simple_form_for @project do |f| %>
+<%= simple_form_for(@project, remote: true) do |f| %>
   <%= f.input :name %>
   <%= f.input :default_charge,prompt: true %>
   <%= f.input :company_id, collection: Company.all,prompt: true %>

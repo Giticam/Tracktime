@@ -1,10 +1,11 @@
 <% if @service.errors.any? %>
-	$('<div id="errors"><p>Please correct the following <%= pluralize(@service.errors.count, "error") %>:</p><ul><% @service.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul></div>').insertBefore('div.remoteform h2');
+    var error_header = "<p>Please correct the following <%= pluralize(@service.errors.count, "error") %>:</p>";
+    var errors = "<ul><% @service.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul>";
+    $('div#errors').html(error_header + errors);
 <% else %>
-	$('div#errors').remove();
-	$("#mynewservice").modal("hide");
-	$('<tr></td><td><%= @service.user.full_name %></td><td><%= link_to @service.project.name, @service.project %></td><td><%= @service.dateworked.strftime("%m/%d/%Y %H:%M") %></td><td><%= @service.hours %></td><td><%= link_to 'Details', @service %></tr>').insertAfter('tr#giti');
- $("#new_service").reset();
+    $('div#errors').html("");
+    $("#mynewservice").modal("hide");
+    $('<tr></td><td><%= @service.user.full_name %></td><td><%= link_to @service.project.name, @service.project %></td><td><%= @service.dateworked.strftime("%m/%d/%Y %H:%M") %></td><td><%= @service.hours %></td><td><%= link_to 'Details', @service %></tr>').insertAfter('tr#giti');
+    $("#new_service").reset();
  $("#mynewservice").hide().fadeIn();
-
 <% end %>

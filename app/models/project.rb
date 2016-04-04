@@ -13,12 +13,12 @@
 
 class Project < ActiveRecord::Base
   belongs_to :company
-	has_many :services
+	has_many :services, dependent: :destroy
 	has_many :users, :through => :services
 	belongs_to :user
 
 	validates :name, length: { minimum: 5 }
-	validates :company, presence: true
+	validates :company_id, presence: true
 	validates :default_charge, numericality: { only_integer: true,
 											 greater_than: 50,
 											 less_than: 10000 }
