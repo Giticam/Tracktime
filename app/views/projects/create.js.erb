@@ -1,11 +1,12 @@
+
 <% if @project.errors.any? %>
     var error_header = "<p>Please correct the following <%= pluralize(@project.errors.count, "error") %>:</p>";
     var errors = "<ul><% @project.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul>";
     $('div#errors').html(error_header + errors);
 <% else %>
     $('div#errors').html("");
-	$("#mynewproject").modal("hide");
-	$('<tr><td><%= link_to @project.name,@project.company %></td><td><%= link_to @company%></td></tr>').insertAfter('tr#proj');
+    $("#mynewproject").modal("hide");
+    $('<tr><td><%= link_to @project.name,@project %></td><td><%=link_to @project.company.name, @project.company%></td></tr>').insertAfter('tr#proj');
     $("#my_project").reset();
  $("#mynewproject").hide().fadeIn();
 <% end %>
