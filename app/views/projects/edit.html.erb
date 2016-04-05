@@ -1,5 +1,5 @@
 <h1>Edit Project</h1>
-<%= render 'form' %>
+<%= render partial: 'form', locals: {is_remote: false}%>
 
 <% content_for :aside do %>
   <% render 'sidebar' %>

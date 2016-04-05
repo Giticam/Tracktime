@@ -4,7 +4,16 @@
 <div class="row">
   <%= button_to "All Services", services_path,class:"btn btn-primary btn-sm",method: :get %>
   <br />
-  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#mynewservice">New Service</button>
+  <div id= "new-service-tooltip">
+  <button
+    type="button"
+    class="btn btn-primary btn-sm"
+    <%= "disabled=true" unless user_signed_in? %>
+    data-toggle="modal"
+    data-target="#mynewservice">
+      New Service
+    </button>
+  </div>
 </div>
 
 
@@ -34,3 +43,4 @@
         </div>
     </div>
 </div>
+<script>$("#new-service-tooltip").tooltip({trigger: "hover", title: "Please sign in to add services"});</script>

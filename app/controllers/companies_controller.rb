@@ -64,6 +64,8 @@ class CompaniesController < ApplicationController
     end
 
     def admin_user
-      redirect_to companies_path, :alert => "Only Admins authorized to create/modify a company" unless current_user.admin
+      flash[:alert] = "Only Admins authorized to create/modify a company"
+      render js: "window.location.pathname = '#{companies_path}'"
+      # redirect_to companies_path, :alert => "Only Admins authorized to create/modify a company" unless current_user.try(:admin)
     end
 end

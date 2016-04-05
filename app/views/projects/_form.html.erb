@@ -1,3 +1,4 @@
+<% is_remote = true if is_remote.nil? %>
 <div id="errors">
 	<% if @project.errors.any? %>
 			<p>Please correct the following <%= pluralize(@project.errors.count, "error") %>:</p>
@@ -9,7 +10,7 @@
 	<% end %>
 </div>
 
-<%= simple_form_for(@project, remote: true) do |f| %>
+<%= simple_form_for(@project,remote: is_remote ) do |f| %>
   <%= f.input :name %>
   <%= f.input :default_charge,prompt: true %>
   <%= f.input :company_id, collection: Company.all,prompt: true %>
